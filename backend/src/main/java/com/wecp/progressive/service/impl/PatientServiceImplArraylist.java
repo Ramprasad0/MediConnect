@@ -1,30 +1,40 @@
 package com.wecp.progressive.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import org.springframework.beans.propertyeditors.PathEditor;
 
 import com.wecp.progressive.entity.Patient;
 import com.wecp.progressive.service.PatientService;
 
 public class PatientServiceImplArraylist implements PatientService{
 
+    private static List<Patient> patientList = new ArrayList<>();
+
     @Override
     public List<Patient> getAllPatients() {
-        return List.of();
+        return patientList;
     }
 
     @Override
     public Integer addPatient(Patient patient) {
-       return -1;
+       patientList.add(patient);
+       return patientList.size();
     }
 
     @Override
     public List<Patient> getAllPatientSortedByName() {
-       return List.of();
+        List<Patient> sortedList = patientList;
+       sortedList.sort(Comparator.comparing(Patient::getFullName));
+       return sortedList;
     }
 
     @Override
     public void emptyArrayList(){
-        
+        patientList = new ArrayList<>();
     }
 
 }

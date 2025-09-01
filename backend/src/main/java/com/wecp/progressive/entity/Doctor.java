@@ -1,63 +1,66 @@
 package com.wecp.progressive.entity;
 
-public class Doctor {
-    private int doctor_id; 
-    private String full_name;
-    private String speciality;
-    private String contact_number;
-    private String eamil;
-    private int years_of_experience;
-    public Doctor() {
-    }
-  
-    public Doctor(int doctor_id, String full_name, String speciality, String contact_number, String eamil,
-            int years_of_experience) {
-        this.doctor_id = doctor_id;
-        this.full_name = full_name;
-        this.speciality = speciality;
-        this.contact_number = contact_number;
-        this.eamil = eamil;
-        this.years_of_experience = years_of_experience;
-    }
+import java.util.Comparator;
 
-    public String getFull_name() {
-        return full_name;
-    }
-    public String getSpeciality() {
-        return speciality;
-    }
-    public String getContact_number() {
-        return contact_number;
-    }
-    public String getEamil() {
-        return eamil;
-    }
-    public int getYears_of_experience() {
-        return years_of_experience;
-    }
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
-    }
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
-    }
-    public void setEamil(String eamil) {
-        this.eamil = eamil;
-    }
-    public void setYears_of_experience(int years_of_experience) {
-        this.years_of_experience = years_of_experience;
-    }
+public class Doctor implements Comparable<Doctor>{
+private int doctorId;
+private String fullName;
+private String speciality;
+private String contactNumber;
+private String email;
+private int yearsOfExperience;
+public Doctor(int doctorId, String fullName, String speciality, String contactNumber, String email,
+        int yearsOfExperience) {
+    this.doctorId = doctorId;
+    this.fullName = fullName;
+    this.speciality = speciality;
+    this.contactNumber = contactNumber;
+    this.email = email;
+    this.yearsOfExperience = yearsOfExperience;
+}
 
-    public int getDoctor_id() {
-        return doctor_id;
-    }
+public Doctor() {
+}
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
-    }
-    
+public int getDoctorId() {
+    return doctorId;
+}
+public void setDoctorId(Integer doctorId) {
+    this.doctorId = doctorId;
+}
+public String getFullName() {
+    return fullName;
+}
+public void setFullName(String fullName) {
+    this.fullName = fullName;
+}
+public String getSpecialty() {
+    return speciality;
+}
+public void setSpecialty(String speciality) {
+    this.speciality = speciality;
+}
+public String getContactNumber() {
+    return contactNumber;
+}
+public void setContactNumber(String contactNumber) {
+    this.contactNumber = contactNumber;
+}
+public String getEmail() {
+    return email;
+}
+public void setEmail(String email) {
+    this.email = email;
+}
+public int getYearsOfExperience() {
+    return yearsOfExperience;
+}
+public void setYearsOfExperience(int yearsOfExperience) {
+    this.yearsOfExperience = yearsOfExperience;
+}
 
+@Override
+public int compareTo(Doctor o) {
+  return Integer.compare(this.yearsOfExperience, o.yearsOfExperience);
+}
 }
