@@ -4,6 +4,7 @@ import com.wecp.progressive.entity.Patient;
 import com.wecp.progressive.service.impl.PatientServiceImplArraylist;
 import com.wecp.progressive.service.impl.PatientServiceImplJpa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,86 +24,55 @@ import java.util.List;
 public class PatientController {
  
     @Autowired
-    private PatientServiceImplArraylist patientServiceImplArraylist;
-    private PatientServiceImplJpa patientServiceImplJpa;
-    // public PatientController(PatientServiceImplArraylist patientServiceImplArraylist, PatientServiceImplJpa patientServiceImplJpa) {
-    //     this.patientServiceImplArraylist = patientServiceImplArraylist;
-    //     this.patientServiceImplJpa = patientServiceImplJpa;
-    // }
+    PatientServiceImplJpa pr;
+
+    public PatientController(PatientServiceImplJpa pr) {
+        this.pr = pr;
+    }
+
+    
     @GetMapping
-    public ResponseEntity<List<Patient>> getAllPatients() {
-        try{
-            return ResponseEntity.ok(patientServiceImplJpa.getAllPatients());
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+    public ResponseEntity<List<Patient>> getAllPatients() throws Exception {
+        return new ResponseEntity<>(pr.getAllPatients(),HttpStatus.OK);
     }
+
+
  
-    @GetMapping("/{patientID}")
-    public ResponseEntity<Patient> getPatientById(@PathVariable int patientId) {
-        try{
-            return ResponseEntity.ok(patientServiceImplJpa.getPatientById(patientId));
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+     @GetMapping("/{patientId}")
+    public ResponseEntity<Patient> getPatientById(@PathVariable int patientId) throws Exception {
+        return new ResponseEntity<>(pr.getPatientById(patientId),HttpStatus.OK);
     }
+    
  
     @PostMapping
-    public ResponseEntity<Integer> addPatient(@RequestBody Patient patient) {
-        try{
-            return ResponseEntity.ok(patientServiceImplJpa.addPatient(patient));
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+    public ResponseEntity<Integer> addPatient(@RequestBody Patient patient) throws Exception {
+        return new ResponseEntity<>(pr.addPatient(patient),HttpStatus.OK);
     }
  
-    @PutMapping("/{patientID}")
-    public ResponseEntity<?> updatePatient(@PathVariable int patientId, @RequestBody Patient patient) {
-        try{
-            patientServiceImplArraylist.updatePatient(patient);
-            return ResponseEntity.ok("Patient updated successfully");
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+    @PutMapping("/{patientId}")
+    public ResponseEntity<?> updatePatient(@PathVariable int id,@RequestBody Patient patient) throws Exception {
+        
+        pr.updatePatient(patient);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
  
-    @DeleteMapping("/{patientID}")
-    public ResponseEntity<?> deletePatient(@PathVariable int patientId) {
-        try{
-            patientServiceImplArraylist.deletePatient(patientId);
-            return ResponseEntity.ok("Patient deleted successfully");
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+    @DeleteMapping("/{patientId}")
+    public ResponseEntity<Void> deletePatient(@PathVariable int id) throws Exception {
+       pr.deletePatient(id);
+       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
  
     @GetMapping("/fromArrayList")
-    public ResponseEntity<List<Patient>> getAllPatientFromArrayList() {
-        try{
-            return ResponseEntity.ok(patientServiceImplArraylist.getAllPatients());
-        }
-        catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
-       
+    public ResponseEntity<List<Patient>> getAllPatientFromArrayList() throws Exception {
+        return new ResponseEntity<>(pr.getAllPatients(),HttpStatus.OK);
     }
     @PostMapping("/toArrayList")
-    public ResponseEntity<?> addPatientToArrayList(@RequestBody Patient patient) {
-        try{
-            patientServiceImplArraylist.addPatient(patient);
-            return ResponseEntity.status(201).build();
-        } catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
-    }
+    public ResponseEntity<?> addPatientToArrayList(@RequestBody Patient patient) throws Exception {
+        return new ResponseEntity<>(pr.addPatient(patient),HttpStatus.CREATED);
+     }
  
-    @GetMapping("/fromArrayList/sorted")
-    public ResponseEntity<List<Patient>> getAllPatientSortedByNameFromArrayList() {
-        try{
-            return ResponseEntity.ok(patientServiceImplArraylist.getAllPatientSortedByName());
-        }
-        catch(Exception e){
-            return ResponseEntity.status(500).build();
-        }
+     @GetMapping("fromArrayList/sorted")
+    public ResponseEntity<List<Patient>> getAllPatientSortedByNameFromArrayList() throws Exception {
+        return new ResponseEntity<>(pr.getAllPatientSortedByName(),HttpStatus.OK);
     }
 }
