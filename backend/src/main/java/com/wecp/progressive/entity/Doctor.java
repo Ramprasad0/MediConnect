@@ -2,7 +2,15 @@ package com.wecp.progressive.entity;
 
 import java.util.Comparator;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Doctor implements Comparable<Doctor>{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int doctorId;
 private String fullName;
 private String speciality;
