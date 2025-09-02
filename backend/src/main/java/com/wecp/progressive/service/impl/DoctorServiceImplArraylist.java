@@ -1,21 +1,19 @@
 package com.wecp.progressive.service.impl;
 
+import com.wecp.progressive.entity.Doctor;
+import com.wecp.progressive.service.DoctorService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.print.Doc;
-
-import com.wecp.progressive.entity.Doctor;
-import com.wecp.progressive.service.DoctorService;
-
-public class DoctorServiceImplArraylist implements DoctorService  {
+public class DoctorServiceImplArraylist  implements DoctorService {
 
     private static List<Doctor> doctorList = new ArrayList<>();
 
     @Override
-    public void emptyArrayList(){
+    public void emptyArrayList() {
         doctorList = new ArrayList<>();
     }
 
@@ -32,9 +30,9 @@ public class DoctorServiceImplArraylist implements DoctorService  {
 
     @Override
     public List<Doctor> getDoctorSortedByExperience() {
-       List<Doctor> sortedList = doctorList;
-       sortedList.sort(Comparator.comparing(Doctor::getYearsOfExperience));
-       return sortedList;
+        List<Doctor> sortedDoctors = doctorList;
+        // sortedDoctors.sort(Comparator.comparing(Doctor::getYearsOfExperience));
+        Collections.sort(sortedDoctors);
+        return sortedDoctors;
     }
-
 }

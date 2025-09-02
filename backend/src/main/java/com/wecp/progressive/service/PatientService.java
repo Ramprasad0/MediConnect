@@ -2,6 +2,7 @@ package com.wecp.progressive.service;
 
 import com.wecp.progressive.dto.PatientDTO;
 import com.wecp.progressive.entity.Patient;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -16,7 +17,6 @@ public interface PatientService {
     default void emptyArrayList() {
     }
 
-    //Do not implement these methods in PatientServiceImplArraylist.java class
     default void updatePatient(Patient patient) throws Exception {}
 
     default void deletePatient(int patientId) throws Exception {}
@@ -25,7 +25,5 @@ public interface PatientService {
         return null;
     }
 
-    //Do not implement these methods in PatientServiceImplArraylist.java and PatientServiceImplJdbc.java class
-    //Do not implement this method until day-13
     default public void modifyPatientDetails(PatientDTO patientDTO) { }
 }

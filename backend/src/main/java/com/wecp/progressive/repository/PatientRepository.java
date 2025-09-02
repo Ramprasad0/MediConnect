@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.wecp.progressive.entity.Patient;
 @Repository
-public interface PatientRepository extends JpaRepository<Patient,Integer> {
+public interface PatientRepository extends JpaRepository<Patient,Integer>{
 
     List<Patient> findByPatientId(int patientId);
+    // List<Patient> findByEmail(String email);
+    
 }
