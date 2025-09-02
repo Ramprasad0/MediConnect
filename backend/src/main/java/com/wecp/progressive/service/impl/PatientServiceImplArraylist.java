@@ -6,10 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.propertyeditors.PathEditor;
+import org.springframework.stereotype.Service;
 
 import com.wecp.progressive.entity.Patient;
 import com.wecp.progressive.service.PatientService;
 
+@Service
 public class PatientServiceImplArraylist implements PatientService{
 
     private static List<Patient> patientList = new ArrayList<>();
