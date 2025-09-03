@@ -1,10 +1,15 @@
 package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Doctor;
+
+import org.springframework.context.annotation.Conditional;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 public class DoctorController {
 
     public ResponseEntity<List<Doctor>> getAllDoctors() {
