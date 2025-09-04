@@ -46,8 +46,6 @@ public class PatientServiceImplJpa  implements PatientService{
                 sortedPatients.sort(Comparator.comparing(Patient::getFullName));
             }
             return sortedPatients;
-        
-
 }
 
    

@@ -32,7 +32,11 @@ public class PatientController {
 
     @GetMapping
     public ResponseEntity<List<Patient>> getAllPatients() throws Exception {
-        return new ResponseEntity<>(pr.getAllPatients(),HttpStatus.OK);
+        List<Patient> p = pr.getAllPatients();
+        if(p.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(p,HttpStatus.OK);
     }
 
     @GetMapping("/{patientId}")

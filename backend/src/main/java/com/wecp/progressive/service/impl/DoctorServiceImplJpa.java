@@ -33,7 +33,7 @@ public class DoctorServiceImplJpa  implements DoctorService{
 
     @Override
     public Integer addDoctor(Doctor doctor) throws Exception {
-        List<Doctor> res=dr.findByEmail(doctor.getEmail());
+            List<Doctor> res=dr.findByEmail(doctor.getEmail());
     //   if(res.size()>0){
     //     throw new DoctorAlreadyExistsException();
     //   }
