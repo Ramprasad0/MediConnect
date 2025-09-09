@@ -43,6 +43,7 @@ public class PatientController {
     public ResponseEntity<Patient> getPatientById(@PathVariable int patientId) throws Exception {
         return new ResponseEntity<>(pr.getPatientById(patientId),HttpStatus.OK);
     }
+    
     @PostMapping
     public ResponseEntity<Integer> addPatient(@RequestBody Patient patient) throws Exception {
         return new ResponseEntity<>(pr.addPatient(patient),HttpStatus.OK);

@@ -10,6 +10,6 @@ import com.wecp.progressive.entity.Patient;
 public interface PatientRepository extends JpaRepository<Patient,Integer>{
 
     List<Patient> findByPatientId(int patientId);
-    // List<Patient> findByEmail(String email);
+    List<Patient> findByEmail(String email);
     
 }

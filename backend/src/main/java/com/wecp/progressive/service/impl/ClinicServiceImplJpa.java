@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wecp.progressive.entity.Clinic;
+import com.wecp.progressive.exception.ClinicAlreadyExistsException;
 import com.wecp.progressive.repository.ClinicRepository;
 import com.wecp.progressive.service.ClinicService;
 
@@ -33,11 +34,24 @@ public class ClinicServiceImplJpa implements ClinicService {
         }
     }
 
-    @Override
-    public Integer addClinic(Clinic clinic) throws Exception {
-     return cr.save(clinic).getClinicId();
+    // @Override
+    // public Integer addClinic(Clinic clinic) throws Exception {
+    //  return cr.save(clinic).getClinicId();
      
+    // }
+    @Override
+public Integer addClinic(Clinic clinic) throws ClinicAlreadyExistsException {
+    List<Clinic> clinicsAtLocation = cr.findByLocation(clinic.getLocation());
+
+    for (Clinic existingClinic : clinicsAtLocation) {
+        if (existingClinic.getClinicName().equalsIgnoreCase(clinic.getClinicName())) {
+            throw new ClinicAlreadyExistsException();
+        }
     }
+
+    return cr.save(clinic).getClinicId();
+}
+
 
     @Override
     public void updateClinic(Clinic clinic) throws Exception {
