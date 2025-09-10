@@ -1,36 +1,55 @@
 package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Clinic;
+import com.wecp.progressive.service.ClinicService;
+import com.wecp.progressive.service.impl.ClinicServiceImplJpa;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/clinic")
 public class ClinicController {
-    public ResponseEntity<List<Clinic>> getAllClinics() {
-        return null;
+    @Autowired
+    ClinicServiceImplJpa c;
+    
+    public ClinicController(ClinicServiceImplJpa c) {
+        this.c = c;
+    }
+    @GetMapping
+    public ResponseEntity<List<Clinic>> getAllClinics() throws Exception {
+        return new ResponseEntity<>(c.getAllClinics(),HttpStatus.OK);
     }
 
-    public ResponseEntity<Clinic> getClinicById(int clinicId) {
-        return null;
+    public ResponseEntity<Clinic> getClinicById(int clinicId) throws Exception {
+        return new ResponseEntity<>(c.getClinicById(clinicId),HttpStatus.OK);
     }
 
-    public ResponseEntity<Integer> addClinic(Clinic clinic) {
-        return null;
+    public ResponseEntity<Integer> addClinic(Clinic clinic) throws Exception {
+        return new ResponseEntity<>(c.addClinic(clinic),HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> updateClinic(int clinicId, Clinic clinic) {
-        return null;
+    public ResponseEntity<Void> updateClinic(int clinicId, Clinic clinic) throws Exception {
+        c.updateClinic(clinic);
+       return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> deleteClinic(int clinicId) {
-        return null;
+    public ResponseEntity<Void> deleteClinic(int clinicId) throws Exception {
+        c.deleteClinic(clinicId);
+       return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/location/{location}")
+    public ResponseEntity<List<Clinic>> getAllClinicByLocation(@PathVariable String location) {
+        return new ResponseEntity<>(c.getAllClinicByLocation(location),HttpStatus.OK);
     }
 
-    public ResponseEntity<List<Clinic>> getAllClinicByLocation(String location) {
-        return null;
-    }
-
-    public ResponseEntity<List<Clinic>> getAllClinicByDoctorId(int doctorId) {
-        return null;
+    public ResponseEntity<List<Clinic>> getAllClinicByDoctorId(@PathVariable int doctorId) {
+        return new ResponseEntity<>(c.getAllClinicByDoctorId(doctorId),HttpStatus.OK);
     }
 }
